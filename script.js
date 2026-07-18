@@ -32,12 +32,13 @@ buildbtn.addEventListener("click", function () {
     b += traits[q].b;
   });
   const headColor = `rgb(${r}, ${g}, ${b})`;
+
   let extraParts = "";
 
   if (qualities.includes("medic")) {
     extraParts += `
-      <rect x="95" y="65" width="10" height="30" fill="white" />
-      <rect x="85" y="75" width="30" height="10" fill="white" />
+      <rect x="95" y="65" width="10" height="30" fill="red" />
+      <rect x="85" y="75" width="30" height="10" fill="red" />
     `;
   }
 
@@ -55,6 +56,24 @@ buildbtn.addEventListener("click", function () {
     `;
   }
 
+  let eyes = `
+    <circle cx="80" cy="90" r="10" fill="cyan" />
+    <circle cx="120" cy="90" r="10" fill="cyan" />
+  `;
+
+  if (qualities.includes("logical")) {
+    eyes = `
+      <rect x="72" y="82" width="16" height="16" fill="cyan" />
+      <rect x="112" y="82" width="16" height="16" fill="cyan" />
+    `;
+  }
+
+  if (qualities.includes("intelligent")) {
+    eyes += `
+      <circle cx="100" cy="70" r="7" fill="magenta" />
+    `;
+  }
+
   const output = document.getElementById("output");
   output.textContent = "Selected: " + qualities.join(", ");
 
@@ -62,8 +81,7 @@ buildbtn.addEventListener("click", function () {
   cyborg.innerHTML = `
     <svg width="200" height="200">
       <rect x="50" y="50" width="100" height="100" fill="${headColor}" />
-      <circle cx="80" cy="90" r="10" fill="cyan" />
-      <circle cx="120" cy="90" r="10" fill="cyan" />
+      ${eyes}
       ${extraParts}
     </svg>
   `;

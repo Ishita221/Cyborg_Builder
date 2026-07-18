@@ -1,20 +1,19 @@
 console.log("script loaded");
 
 const traits = {
-  brave:       { r: 120, g: 0,   b: 0   },
-  cold:        { r: 0,   g: 0,   b: 120 },
-  calm:        { r: 0,   g: 80,  b: 80  },
-  logical:     { r: 0,   g: 100, b: 0   },
-  creative:    { r: 90,  g: 0,   b: 60  },
-  intelligent: { r: 0,   g: 90,  b: 90  },
-  combat:      { r: 100, g: 20,  b: 0   },
-  medic:       { r: 90,  g: 90,  b: 0   },
-  hacker:      { r: 0,   g: 120, b: 20  },
-  heavy:       { r: 40,  g: 40,  b: 40  },
-  agile:       { r: 0,   g: 60,  b: 90  },
-  stealth:     { r: 30,  g: 0,   b: 40  }
+  brave:       { r: 120, g: 0,   b: 0,   effect: "Frame glows red" },
+  cold:        { r: 0,   g: 0,   b: 120, effect: "Frame glows blue" },
+  calm:        { r: 0,   g: 80,  b: 80,  effect: "Teal frame tone" },
+  logical:     { r: 0,   g: 100, b: 0,   effect: "Square sensor eyes" },
+  creative:    { r: 90,  g: 0,   b: 60,  effect: "Violet frame tint" },
+  intelligent: { r: 0,   g: 90,  b: 90,  effect: "Third eye added" },
+  combat:      { r: 100, g: 20,  b: 0,   effect: "Shoulder spikes" },
+  medic:       { r: 90,  g: 90,  b: 0,   effect: "Medical cross" },
+  hacker:      { r: 0,   g: 120, b: 20,  effect: "Antenna uplink" },
+  heavy:       { r: 40,  g: 40,  b: 40,  effect: "Bulkier frame" },
+  agile:       { r: 0,   g: 60,  b: 90,  effect: "Slimmer frame" },
+  stealth:     { r: 30,  g: 0,   b: 40,  effect: "Dark violet shell" }
 };
-
 const buildbtn = document.getElementById("buildbtn");
 
 buildbtn.addEventListener("click", function () {
@@ -31,6 +30,36 @@ buildbtn.addEventListener("click", function () {
     g += traits[q].g;
     b += traits[q].b;
   });
+  const polishBtn = document.getElementById("polishBtn");
+
+polishBtn.addEventListener("click", async function () {
+  const checked = document.querySelectorAll("#qualities input:checked");
+  const qualities = [];
+  checked.forEach(function (box) {
+    qualities.push(box.value);
+  });
+
+  const prompt =
+    "a realistic futuristic humanoid cyborg robot, " +
+    qualities.join(", ") +
+    ", detailed, cinematic lighting, sci-fi";
+
+  const aiResult = document.getElementById("aiResult");
+  aiResult.textContent = "Generating... (thoda ruk, AI bana raha hai)";
+
+  try {
+    const response = await fetch("/api/generate?prompt=" + encodeURIComponent(prompt));
+    const data = await response.json();
+
+    if (data.image) {
+      aiResult.innerHTML = `<img src="${data.image}" width="240" />`;
+    } else {
+      aiResult.textContent = "Failed. Dubara try kar.";
+    }
+  } catch (err) {
+    aiResult.textContent = "Error: " + err.message;
+  }
+});
   const headColor = `rgb(${r}, ${g}, ${b})`;
 let bodyWidth = 100;
   if (qualities.includes("heavy")) bodyWidth = 130;
@@ -79,6 +108,17 @@ let bodyWidth = 100;
 
   const output = document.getElementById("output");
   output.textContent = "Selected: " + qualities.join(", ");
+  const legend = document.getElementById("legend");
+  let rows = "";
+  qualities.forEach(function (q) {
+    rows += `
+      <div class="legend-row">
+        <span class="q">${q}</span>
+        <span class="fx">${traits[q].effect}</span>
+      </div>
+    `;
+  });
+  legend.innerHTML = rows;
 
   const cyborg = document.getElementById("cyborg");
   cyborg.innerHTML = `

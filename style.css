@@ -61,3 +61,38 @@ label {
 #cyborg {
   margin-top: 20px;
 }
+#legend {
+  margin-top: 20px;
+  max-width: 340px;
+}
+.legend-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid #003d4d;
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+}
+.legend-row .q {
+  color: #00d9ff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.legend-row .fx {
+  color: #7fdfff;
+}
+.layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.panel-left {
+  flex: 1;
+}
+
+.panel-right {
+  flex: 1;
+  position: sticky;
+  top: 30px;
+}

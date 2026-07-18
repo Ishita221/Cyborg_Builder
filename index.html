@@ -9,7 +9,8 @@
 <body>
     <h1>Cyborg Builder</h1>
     <p>Pick your Qualities.Build your machine</p>
-    <div id="qualities">
+    <div class="layout">
+    <div class="panel-left"><div id="qualities">
   <h3>Personality</h3>
   <label><input type="checkbox" value="brave">Brave</label>
   <label><input type="checkbox" value="cold">Cold</label>
@@ -25,14 +26,17 @@
   <label><input type="radio" name="domain" value="hacker">Hacker</label>
   
   <h3>Build</h3>
-  <label><input type="checkbox" value="heavy">Heavy</label>
-  <label><input type="checkbox" value="agile">Agile</label>
-  <label><input type="checkbox" value="stealth">Stealth</label>
+  <label><input type="radio" name="build" value="heavy">Heavy</label>
+  <label><input type="radio" name="build" value="agile">Agile</label>
+  <label><input type="radio" name="build" value="stealth">Stealth</label>
 </div>
-    <button id="buildbtn">build Cyborg</button>
+    <button id="buildbtn">build Cyborg</button></div>
+    <div class="panel-right">
     <div id="output"> </div>
     <div id="cyborg"></div>
     <div id="legend"></div>
+    </div>
+    </div>
     
     <script src="script.js"></script>
 </body>

@@ -10,12 +10,23 @@ buildbtn.addEventListener("click", function () {
     qualities.push(box.value);
   });
 
-  const output = document.getElementById("output");
-  output.textContent = "Selected: " + qualities.join(", ");
+
 
 let headColor = "gray";
-  if (qualities.includes("brave")) headColor = "red";
-  if (qualities.includes("cold")) headColor = "blue";
+  let cyborgType = "Basic Unit";
+
+  if (qualities.includes("brave") && qualities.includes("cold")) {
+    headColor = "purple";
+    cyborgType = "Warlord Frame";
+  } else if (qualities.includes("brave")) {
+    headColor = "red";
+    cyborgType = "Assault Unit";
+  } else if (qualities.includes("cold")) {
+    headColor = "blue";
+    cyborgType = "Sentinel Core";
+  }
+    const output = document.getElementById("output");
+  output.textContent = "Selected: " + qualities.join(", ") + " → " + cyborgType;
 
 
   const cyborg = document.getElementById("cyborg");

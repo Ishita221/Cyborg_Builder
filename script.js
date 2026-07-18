@@ -14,6 +14,7 @@ const traits = {
   agile:       { r: 0,   g: 60,  b: 90,  effect: "Slimmer frame" },
   stealth:     { r: 30,  g: 0,   b: 40,  effect: "Dark violet shell" }
 };
+
 const buildbtn = document.getElementById("buildbtn");
 
 buildbtn.addEventListener("click", function () {
@@ -30,41 +31,13 @@ buildbtn.addEventListener("click", function () {
     g += traits[q].g;
     b += traits[q].b;
   });
-  const polishBtn = document.getElementById("polishBtn");
-
-polishBtn.addEventListener("click", async function () {
-  const checked = document.querySelectorAll("#qualities input:checked");
-  const qualities = [];
-  checked.forEach(function (box) {
-    qualities.push(box.value);
-  });
-
-  const prompt =
-    "a realistic futuristic humanoid cyborg robot, " +
-    qualities.join(", ") +
-    ", detailed, cinematic lighting, sci-fi";
-
-  const aiResult = document.getElementById("aiResult");
-  aiResult.textContent = "Generating... (thoda ruk, AI bana raha hai)";
-
-  try {
-    const response = await fetch("/api/generate?prompt=" + encodeURIComponent(prompt));
-    const data = await response.json();
-
-    if (data.image) {
-      aiResult.innerHTML = `<img src="${data.image}" width="240" />`;
-    } else {
-      aiResult.textContent = "Failed. Dubara try kar.";
-    }
-  } catch (err) {
-    aiResult.textContent = "Error: " + err.message;
-  }
-});
   const headColor = `rgb(${r}, ${g}, ${b})`;
-let bodyWidth = 100;
+
+  let bodyWidth = 100;
   if (qualities.includes("heavy")) bodyWidth = 130;
   if (qualities.includes("agile")) bodyWidth = 70;
   const bodyX = 100 - bodyWidth / 2;
+
   let extraParts = "";
 
   if (qualities.includes("medic")) {
@@ -108,6 +81,7 @@ let bodyWidth = 100;
 
   const output = document.getElementById("output");
   output.textContent = "Selected: " + qualities.join(", ");
+
   const legend = document.getElementById("legend");
   let rows = "";
   qualities.forEach(function (q) {
@@ -135,17 +109,11 @@ let bodyWidth = 100;
       </defs>
 
       <g fill="none" stroke="${headColor}" stroke-width="3" filter="url(#glow)">
-        <!-- HEAD -->
         <rect x="${bodyX}" y="20" width="${bodyWidth}" height="80" />
-        <!-- TORSO -->
         <rect x="70" y="110" width="100" height="110" />
-        <!-- LEFT ARM -->
         <rect x="40" y="115" width="22" height="90" />
-        <!-- RIGHT ARM -->
         <rect x="178" y="115" width="22" height="90" />
-        <!-- LEFT LEG -->
         <rect x="85" y="230" width="28" height="90" />
-        <!-- RIGHT LEG -->
         <rect x="127" y="230" width="28" height="90" />
       </g>
 
@@ -157,3 +125,35 @@ let bodyWidth = 100;
     </svg>
   `;
 });
+
+
+polishBtn.addEventListener("click", async function () {
+  const checked = document.querySelectorAll("#qualities input:checked");
+  const qualities = [];
+  checked.forEach(function (box) {
+    qualities.push(box.value);
+  });
+
+  const prompt =
+    "a realistic futuristic humanoid cyborg robot, " +
+    qualities.join(", ") +
+    ", detailed, cinematic lighting, sci-fi";
+
+  const aiResult = document.getElementById("aiResult");
+  aiResult.textContent = "Generating... (thoda ruk, AI bana raha hai)";
+
+  try {
+    const response = await fetch("/api/generate?prompt=" + encodeURIComponent(prompt));
+    const data = await response.json();
+
+    if (data.image) {
+      aiResult.innerHTML = `<img src="${data.image}" width="240" />`;
+    } else {
+      aiResult.textContent = "Failed. Dubara try kar.";
+    }
+  } catch (err) {
+    aiResult.textContent = "Error: " + err.message;
+  }
+});
+
+const polishBtn = document.getElementById("polishBtn");

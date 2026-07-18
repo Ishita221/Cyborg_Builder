@@ -126,7 +126,7 @@ buildbtn.addEventListener("click", function () {
   `;
 });
 
-
+const polishBtn = document.getElementById("polishBtn");
 polishBtn.addEventListener("click", async function () {
   const checked = document.querySelectorAll("#qualities input:checked");
   const qualities = [];
@@ -156,4 +156,3 @@ polishBtn.addEventListener("click", async function () {
   }
 });
 
-const polishBtn = document.getElementById("polishBtn");

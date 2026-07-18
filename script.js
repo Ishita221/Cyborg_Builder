@@ -32,6 +32,28 @@ buildbtn.addEventListener("click", function () {
     b += traits[q].b;
   });
   const headColor = `rgb(${r}, ${g}, ${b})`;
+  let extraParts = "";
+
+  if (qualities.includes("medic")) {
+    extraParts += `
+      <rect x="95" y="65" width="10" height="30" fill="white" />
+      <rect x="85" y="75" width="30" height="10" fill="white" />
+    `;
+  }
+
+  if (qualities.includes("combat")) {
+    extraParts += `
+      <polygon points="50,50 40,30 60,50" fill="silver" />
+      <polygon points="150,50 160,30 140,50" fill="silver" />
+    `;
+  }
+
+  if (qualities.includes("hacker")) {
+    extraParts += `
+      <line x1="100" y1="50" x2="100" y2="25" stroke="lime" stroke-width="3" />
+      <circle cx="100" cy="22" r="5" fill="lime" />
+    `;
+  }
 
   const output = document.getElementById("output");
   output.textContent = "Selected: " + qualities.join(", ");
@@ -42,6 +64,7 @@ buildbtn.addEventListener("click", function () {
       <rect x="50" y="50" width="100" height="100" fill="${headColor}" />
       <circle cx="80" cy="90" r="10" fill="cyan" />
       <circle cx="120" cy="90" r="10" fill="cyan" />
+      ${extraParts}
     </svg>
   `;
 });

@@ -1,0 +1,63 @@
+body {
+  background: #000814;
+  color: #00d9ff;
+  font-family: "Courier New", monospace;
+  padding: 30px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: #00d9ff;
+  text-shadow: 0 0 10px #00d9ff;
+  letter-spacing: 3px;
+}
+
+h3 {
+  color: #00a3cc;
+  border-bottom: 1px solid #003d4d;
+  padding-bottom: 5px;
+  margin-top: 25px;
+}
+
+label {
+  display: inline-block;
+  margin: 6px 15px 6px 0;
+  cursor: pointer;
+  color: #7fdfff;
+}
+
+#qualities input {
+  accent-color: #00d9ff;
+  margin-right: 5px;
+}
+
+#buildbtn {
+  background: transparent;
+  color: #00d9ff;
+  border: 2px solid #00d9ff;
+  padding: 12px 30px;
+  font-family: "Courier New", monospace;
+  font-size: 16px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  margin-top: 20px;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+#buildbtn:hover {
+  background: #00d9ff;
+  color: #000814;
+  box-shadow: 0 0 20px #00d9ff;
+}
+
+#output {
+  margin-top: 20px;
+  color: #7fdfff;
+  letter-spacing: 1px;
+}
+
+#cyborg {
+  margin-top: 20px;
+}

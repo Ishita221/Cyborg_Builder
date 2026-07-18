@@ -32,7 +32,10 @@ buildbtn.addEventListener("click", function () {
     b += traits[q].b;
   });
   const headColor = `rgb(${r}, ${g}, ${b})`;
-
+let bodyWidth = 100;
+  if (qualities.includes("heavy")) bodyWidth = 130;
+  if (qualities.includes("agile")) bodyWidth = 70;
+  const bodyX = 100 - bodyWidth / 2;
   let extraParts = "";
 
   if (qualities.includes("medic")) {
@@ -79,10 +82,38 @@ buildbtn.addEventListener("click", function () {
 
   const cyborg = document.getElementById("cyborg");
   cyborg.innerHTML = `
-    <svg width="200" height="200">
-      <rect x="50" y="50" width="100" height="100" fill="${headColor}" />
-      ${eyes}
-      ${extraParts}
+    <svg width="240" height="360">
+
+      <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <g fill="none" stroke="${headColor}" stroke-width="3" filter="url(#glow)">
+        <!-- HEAD -->
+        <rect x="${bodyX}" y="20" width="${bodyWidth}" height="80" />
+        <!-- TORSO -->
+        <rect x="70" y="110" width="100" height="110" />
+        <!-- LEFT ARM -->
+        <rect x="40" y="115" width="22" height="90" />
+        <!-- RIGHT ARM -->
+        <rect x="178" y="115" width="22" height="90" />
+        <!-- LEFT LEG -->
+        <rect x="85" y="230" width="28" height="90" />
+        <!-- RIGHT LEG -->
+        <rect x="127" y="230" width="28" height="90" />
+      </g>
+
+      <g filter="url(#glow)">
+        ${eyes}
+        ${extraParts}
+      </g>
+
     </svg>
   `;
 });

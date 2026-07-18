@@ -19,12 +19,11 @@
   <label><input type="checkbox" value="logical">Logical</label>
   <label><input type="checkbox" value="creative">Creative</label>
   <label><input type="checkbox" value="intelligent">Intelligent</label>
-
-  <h3>Domain</h3>
-  <label><input type="checkbox" value="combat">Combat</label>
-  <label><input type="checkbox" value="medic">Medic</label>
-  <label><input type="checkbox" value="hacker">Hacker</label>
-
+<h3>Domain</h3>
+  <label><input type="radio" name="domain" value="combat">Combat</label>
+  <label><input type="radio" name="domain" value="medic">Medic</label>
+  <label><input type="radio" name="domain" value="hacker">Hacker</label>
+  
   <h3>Build</h3>
   <label><input type="checkbox" value="heavy">Heavy</label>
   <label><input type="checkbox" value="agile">Agile</label>
@@ -33,6 +32,7 @@
     <button id="buildbtn">build Cyborg</button>
     <div id="output"> </div>
     <div id="cyborg"></div>
+    <div id="legend"></div>
     
     <script src="script.js"></script>
 </body>

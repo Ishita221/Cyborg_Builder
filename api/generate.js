@@ -14,7 +14,9 @@ const response = await fetch(
   
 
   if (!response.ok) {
-    return res.status(500).json({ error: "Image generation failed" });
+    const errorText = await response.text();
+    console.log("HF error:", errorText);
+    return res.status(500).json({ error: errorText });
   }
 
   const imageBuffer = await response.arrayBuffer();

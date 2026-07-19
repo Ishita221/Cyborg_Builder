@@ -1,8 +1,7 @@
 export default async function handler(req, res) {
   const prompt = req.query.prompt || "a futuristic robot";
-
-  const response = await fetch(
-    "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2-1",
+const response = await fetch(
+    "https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-schnell",
     {
       method: "POST",
       headers: {
@@ -12,6 +11,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({ inputs: prompt }),
     }
   );
+  
 
   if (!response.ok) {
     return res.status(500).json({ error: "Image generation failed" });
